@@ -57,8 +57,8 @@ services:
       - grafana-data:/var/lib/grafana
       # Grafana provisioning files (datasource + dashboard definitions)
       - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
-      # Folder containing JSON dashboards
-      - ./monitoring/grafana/dashboards:/etc/grafana/dashboards
+      # Folder containing JSON dashboards (must match path in dashboard.yml)
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards
     networks:
       - fusion-net
     depends_on:
