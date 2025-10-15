@@ -3,15 +3,14 @@ version: "3.9"
 services:
   # ---------- FRONTEND ----------
   frontend:
-    image: nginx:alpine
+    build: ./frontend
     container_name: fusionpact-frontend
-    volumes:
-      - ./frontend:/usr/share/nginx/html:ro
     ports:
       - "80:80"
     networks:
       - fusion-net
     restart: always
+
 
   # ---------- BACKEND ----------
   backend:
