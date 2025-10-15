@@ -18,7 +18,7 @@ services:
     build: ./backend
     container_name: fusionpact-backend
     volumes:
-      - backend-data:/app/app/data       # Persist user data
+      - backend-data:/app/app/data   # Persist user data
     ports:
       - "8000:8000"
     networks:
@@ -48,10 +48,17 @@ services:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+      - GF_PATHS_DATA=/var/lib/grafana
     ports:
       - "3000:3000"
     volumes:
+      # Grafana persistent data
       - grafana-data:/var/lib/grafana
+      # Grafana provisioning files (datasource + dashboard definitions)
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+      # Folder containing JSON dashboards
+      - ./monitoring/grafana/dashboards:/etc/grafana/dashboards
     networks:
       - fusion-net
     depends_on:
